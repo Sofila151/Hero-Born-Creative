@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TeamCapsule : MonoBehaviour
+public class SuperSize : MonoBehaviour
  {
        // 1
      void OnCollisionEnter(Collision collision)
@@ -14,7 +14,7 @@ public class TeamCapsule : MonoBehaviour
              Destroy(this.transform.parent.gameObject);
 
              // 4
-             Debug.Log("Team Capsule Collected, Defend");
+             Debug.Log("XL mode activated");
          }
      }
  } 
