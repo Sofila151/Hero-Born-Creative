@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SuperSize : MonoBehaviour
+public class ShieldBehavior : MonoBehaviour
  {
        // 1
      void OnCollisionEnter(Collision collision)
@@ -14,7 +14,7 @@ public class SuperSize : MonoBehaviour
              Destroy(this.transform.parent.gameObject);
 
              // 4
-             Debug.Log("XL mode activated");
+             Debug.Log("Shield Activated, Attack");
          }
      }
  } 
