@@ -7,7 +7,7 @@ public class GameBehavior : MonoBehaviour
  {
     public bool showWinScreen = false;
 
-    public string labeltext = "Defend your base. Capture the red capsule using powerups to win!";
+    public string labeltext = "Collect all power ups then capture the red capsule";
     public int maxItems = 4;
 
     private int _itemsCollected = 0;
@@ -28,7 +28,7 @@ public class GameBehavior : MonoBehaviour
             }
             else
             {
-                labeltext = "Item found, only " + (maxItems - _itemsCollected) + " more to go!";
+                labeltext = "Power up found way to go!";
             }
          }
       }
