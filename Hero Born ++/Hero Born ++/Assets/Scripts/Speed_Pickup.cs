@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Speed_Pickup : MonoBehaviour
 {
-    public float speedBoostAmount = .5f;
+    public float speedBoostAmount = 2f;
     public GameBehavior gameManager;
 
     void Start()
