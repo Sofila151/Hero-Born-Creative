@@ -17,15 +17,16 @@ public class PlayerBehavior : MonoBehaviour
     private float hInput;
     private Rigidbody _rb;
     private CapsuleCollider _col;
+    private GameBehavior _gameManager;
 
     private bool doJump = false;
     private bool doShoot = false;
-    private bool gothit = false;
-
+ 
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _col = GetComponent<CapsuleCollider>();
+        _gameManager = GameObject.Find("Game Manager").GetComponent<GameBehavior>();
     }
 
     void Update()
@@ -51,6 +52,7 @@ public class PlayerBehavior : MonoBehaviour
             _rb.AddForce(Vector3.up * jumpVelocity, ForceMode.Impulse);
             doJump = false;
         }
+
         Vector3 rotation = Vector3.up * hInput;
         Quaternion angleRot = Quaternion.Euler(rotation * Time.fixedDeltaTime);
 
@@ -65,23 +67,19 @@ public class PlayerBehavior : MonoBehaviour
             doShoot = false;
         }
     }
-    
+
     private bool IsGrounded()
     {
         Vector3 capsuleBottom = new Vector3(_col.bounds.center.x, _col.bounds.min.y, _col.bounds.center.z);
         bool grounded = Physics.CheckCapsule(_col.bounds.center, capsuleBottom, distanceToGround, groundLayer, QueryTriggerInteraction.Ignore);
         return grounded;
     }
-    void OnCollisionEnter (Collision collision)
-{
-    if (!gothit)
+
+    void OnCollisionEnter(Collision collision)
     {
-        gothit = true;
-        Debug.Log("Player Collided with" + collision.gameObject.name);
-    }
-}
-    void OnCollisionExit(Collision collision)
-    {
-        gothit = false;
+        if (collision.gameObject.name == "Enemy")
+            {
+                _gameManager.HP -= 1;
+            }
     }
 }

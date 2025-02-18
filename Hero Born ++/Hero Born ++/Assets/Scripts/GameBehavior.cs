@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameBehavior : MonoBehaviour 
  {
     public bool showWinScreen = false;
+    public bool showLossScreen = false;
 
     public string labeltext = "Collect all power ups then capture the red capsule";
     public int maxItems = 4;
@@ -32,28 +33,50 @@ public class GameBehavior : MonoBehaviour
             }
          }
       }
-     private int _playerHP = 3;
-     public int HP
-     {
-        get {return _playerHP; }
-        set {
+     
+    private int _playerHP = 3;
+    public int HP
+    {
+        get { return _playerHP; }
+        set
+        {
             _playerHP = value;
-            Debug.LogFormat ("Lives: {0}", _playerHP);
+
+            if (_playerHP <= 0)
+            {
+                labeltext = "You want another life with that?";
+                showLossScreen = true;
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                labeltext = "Ouch... that’s gotta hurt.";
+            }
+
+            Debug.LogFormat("Lives: {0}", _playerHP);
         }
-     }
-       void OnGUI()
+    }
+
+    void RestartLevel()
+    {
+        SceneManager.LoadScene(0);
+        Time.timeScale = 1.0f;
+    }
+
+    void OnGUI()
     {
         GUI.Box(new Rect(20, 20, 150, 25), "Player Health: " + _playerHP);
         GUI.Box(new Rect(20, 50, 150, 25), "Items Collected: " + _itemsCollected);
         GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height - 50, 300, 50), labeltext);
 
-        if (showWinScreen)
+        if (showWinScreen && GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 100), "You Won!"))
         {
-            if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 100), "You Won!"))
-            {
-                SceneManager.LoadScene(0);
-                Time.timeScale = 1.0f;
-            }
+            RestartLevel();
+        }
+
+        if (showLossScreen && GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 100), "You lose..."))
+        {
+            RestartLevel();
         }
     }
 }
