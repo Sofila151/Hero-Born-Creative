@@ -2,50 +2,77 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameBehavior : MonoBehaviour 
- {
-    public bool showWinScreen = false;
-    public bool showLossScreen = false;
-
-    public string labeltext = "Collect all power ups then capture the red capsule";
-    public int maxItems = 4;
+{
+    public Text healthText;
+    public Text itemsText;
+    public Text messageText;
+    public GameObject winScreen;
+    public GameObject lossScreen;
+    public Button restartButton;
+    public Button creditsButton;
 
     private int _itemsCollected = 0;
+    private int _playerHP = 2;
+    public int maxItems = 4;
+
+    private bool showWinScreen = false;
+    private bool showLossScreen = false;
+
+    private string labeltext = "Collect all 4 items to win!";
+
     public int Items
-     {
-         get { return _itemsCollected; }
-         set { 
-             _itemsCollected = value; 
+    {
+        get { return _itemsCollected; }
+        set 
+        { 
+            _itemsCollected = value; 
+            if (itemsText != null) 
+                itemsText.text = "Items Collected: " + _itemsCollected;
 
-            if(_itemsCollected >= maxItems)
-
+            if (_itemsCollected >= maxItems)
             {
                 labeltext = "You've found all the items!";
-
                 showWinScreen = true;
 
+                if (winScreen != null) 
+                    winScreen.SetActive(true);
+
+                if (creditsButton != null) 
+                creditsButton.gameObject.SetActive(true); 
                 Time.timeScale = 0f;
             }
             else
             {
-                labeltext = "Power up found way to go!";
+                labeltext = "Power up found, way to go!";
             }
-         }
-      }
-     
-    private int _playerHP = 3;
+            
+            if (messageText != null)
+                messageText.text = labeltext;
+        }
+    }
+
     public int HP
     {
         get { return _playerHP; }
         set
         {
             _playerHP = value;
+            if (healthText != null) 
+                healthText.text = "Player Health: " + _playerHP;
 
             if (_playerHP <= 0)
             {
                 labeltext = "You want another life with that?";
                 showLossScreen = true;
+
+                if (lossScreen != null) 
+                    lossScreen.SetActive(true);
+
+                if (restartButton != null) 
+                    restartButton.gameObject.SetActive(true); 
                 Time.timeScale = 0f;
             }
             else
@@ -53,30 +80,22 @@ public class GameBehavior : MonoBehaviour
                 labeltext = "Ouch... that’s gotta hurt.";
             }
 
+            if (messageText != null)
+                messageText.text = labeltext;
+
             Debug.LogFormat("Lives: {0}", _playerHP);
         }
     }
 
-    void RestartLevel()
+    public void RestartLevel()  
     {
-        SceneManager.LoadScene(0);
         Time.timeScale = 1.0f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    void OnGUI()
+    public void GoToCredits()
     {
-        GUI.Box(new Rect(20, 20, 150, 25), "Player Health: " + _playerHP);
-        GUI.Box(new Rect(20, 50, 150, 25), "Items Collected: " + _itemsCollected);
-        GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height - 50, 300, 50), labeltext);
-
-        if (showWinScreen && GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 100), "You Won!"))
-        {
-            RestartLevel();
-        }
-
-        if (showLossScreen && GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 50, 200, 100), "You lose..."))
-        {
-            RestartLevel();
-        }
+        Time.timeScale = 1.0f; 
+        SceneManager.LoadScene("Credits");
     }
 }
