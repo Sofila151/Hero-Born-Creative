@@ -84,6 +84,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Health_Pack
       objectReference: {fileID: 0}
+    - target: {fileID: 7002025271517485046, guid: cdeed8c5f822e464dbe443e7ab52b8e9, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -133,6 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5754df1a8f2bff4e8aaaa71df116fbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
 --- !u!4 &7200312841917788934 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3794229546651010370, guid: cdeed8c5f822e464dbe443e7ab52b8e9, type: 3}
