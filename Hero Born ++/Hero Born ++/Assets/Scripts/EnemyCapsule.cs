@@ -14,7 +14,8 @@ public class EnemyCapsule : MonoBehaviour
      {
          if(collision.gameObject.name == "Player")
          {
-             Destroy(this.transform.parent.gameObject);
+            GetComponent<AudioSource>().Play();
+             Destroy(this.transform.parent.gameObject ,0.05f);
              Debug.Log("Enemy Capsule Secured!");
              gameManager.Items += 1;
          }

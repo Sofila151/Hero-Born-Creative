@@ -17,7 +17,8 @@ public class Speed_Pickup : MonoBehaviour
         if (collision.gameObject.name == "Player")
         {
             SpeedBoost(collision.gameObject);
-            Destroy(this.transform.parent.gameObject);
+            GetComponent<AudioSource>().Play();
+            Destroy(this.transform.parent.gameObject ,0.05f);
             Debug.Log("Need for Speed Mode Active");
             gameManager.Items += 1;
         }

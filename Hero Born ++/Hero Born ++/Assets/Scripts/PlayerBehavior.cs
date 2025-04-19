@@ -9,7 +9,6 @@ public class PlayerBehavior : MonoBehaviour
     public float jumpVelocity = 5f;
     public float distanceToGround = 0.1f;
     public LayerMask groundLayer;
-
     public GameObject bullet;
     public float bulletSpeed = 100f;
 
@@ -21,6 +20,7 @@ public class PlayerBehavior : MonoBehaviour
 
     private bool doJump = false;
     private bool doShoot = false;
+    
  
     void Start()
     {
@@ -64,6 +64,9 @@ public class PlayerBehavior : MonoBehaviour
             GameObject newBullet = Instantiate(bullet, this.transform.position + new Vector3(1, 0, 0), this.transform.rotation);
             Rigidbody bulletRB = newBullet.GetComponent<Rigidbody>();
             bulletRB.velocity = this.transform.forward * bulletSpeed;
+            
+            newBullet.GetComponent<AudioSource>().Play();
+            
             doShoot = false;
         }
     }

@@ -284,6 +284,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
+  bulletSound: {fileID: 8300000, guid: 60247ca3138f44cbb92573c800ada3ea, type: 3}
   bullet: {fileID: 5961284507466108897, guid: 33d174737ec57460991c2eba6c6ce9ce, type: 3}
   bulletSpeed: 100
 --- !u!1001 &6823719124464370285

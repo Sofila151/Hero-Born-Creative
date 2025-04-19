@@ -3,7 +3,9 @@ guid: 5c69e87f040e9cb4cadcb355f26629f3
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - gameManager: {instanceID: 0}
+  - pingSound: {fileID: 8300000, guid: 721fba5bb8d7343b4958d8a0261a7c3a, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

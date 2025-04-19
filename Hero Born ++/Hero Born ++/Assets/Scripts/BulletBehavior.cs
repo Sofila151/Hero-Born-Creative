@@ -8,6 +8,7 @@ public class BulletBehavior : MonoBehaviour
  
     void Start () 
     {
+        GetComponent<AudioSource>().Play();
         Destroy(this.gameObject, onscreenDelay);
      }
  } 

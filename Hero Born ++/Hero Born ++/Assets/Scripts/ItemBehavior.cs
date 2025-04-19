@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemBehavior : MonoBehaviour 
  {
      public GameBehavior gameManager;
+
  
      void Start()
      {              
@@ -14,7 +15,8 @@ public class ItemBehavior : MonoBehaviour
      {
          if(collision.gameObject.name == "Player")
          {
-             Destroy(this.transform.parent.gameObject);
+             GetComponent<AudioSource>().Play();
+             Destroy(this.transform.parent.gameObject ,0.05f);
              Debug.Log("Item collected!");
             gameManager.Items += 1;
          }
